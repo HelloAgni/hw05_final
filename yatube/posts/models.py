@@ -64,7 +64,7 @@ class Comment(models.Model):
         'текст комментария',
         help_text='введите комментарий'
     )
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
 
 class Follow(models.Model):
