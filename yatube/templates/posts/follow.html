@@ -10,19 +10,18 @@
   {% for post in page_obj %}
     <article>
       {% include "includes/post_info.html" %}
-
-    {% if post.group %}
-    <a href="{% url "posts:post_detail" post.id %}">
-       подробная информация
-      </a>
-    {% endif %}
-    <p>
-      {% if post.group.slug %}
-      Группа:
-        <a href="{% url "posts:group_list" post.group.slug %}">
-          {{ post.group.title }}
+      {% if post.group %}
+        <a href="{% url "posts:post_detail" post.id %}">
+         подробная информация
         </a>
       {% endif %}
+      <p>
+        {% if post.group.slug %}
+          Группа:
+          <a href="{% url "posts:group_list" post.group.slug %}">
+            {{ post.group.title }}
+          </a>
+        {% endif %}
       </p>
     </article>
     {% if not forloop.last %}<hr>{% endif %}
