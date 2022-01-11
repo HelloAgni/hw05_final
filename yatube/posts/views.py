@@ -10,7 +10,7 @@ from .models import Follow, Group, Post, User
 
 @cache_page(20)
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.select_related('author', 'group').all()
     paginator = Paginator(posts, settings.OBJECTS_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -139,8 +139,10 @@ def profile_follow(request, username):
 @login_required
 def profile_unfollow(request, username):
     author = get_object_or_404(User, username=username)
-    Follow.objects.get(
-        user=request.user,
-        author=author
-    ).delete()
+    auth_user = request.user.is_authenticated
+    following = (
+        auth_user and author.following.filter(user=request.user).exists()
+    )
+    if following:
+        Follow.objects.get().delete()
     return redirect('posts:profile', username=username)

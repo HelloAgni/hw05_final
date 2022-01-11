@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import Client, TestCase
 
-from ..models import Group, Post
+from ..models import Follow, Group, Post
 
 User = get_user_model()
 
@@ -24,6 +24,10 @@ class StaticURLTests(TestCase):
             author=cls.post_author,
             text='Тестовый пост',
         )
+        cls.follow = Follow.objects.create(
+            author=cls.post_author,
+            user=cls.user,
+        )
 
     def setUp(self):
         self.guest_client = Client()
@@ -39,6 +43,7 @@ class StaticURLTests(TestCase):
             f'/posts/{self.post.id}/edit/': 'posts/create_post.html',
             f'/profile/{self.post_author}/': 'posts/profile.html',
             '/unexisting_page/': 'core/404.html',
+            '/follow/': 'posts/follow.html',
         }
         cache.clear()
 
@@ -64,6 +69,30 @@ class StaticURLTests(TestCase):
         )
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
+    def test_ok_page_follow(self):
+        """Запрос пользователя подписаться на автора"""
+        response = self.authorized_client.get(
+            f'/profile/{self.post_author}/follow/', follow=True
+        )
+        self.assertRedirects(response, f'/profile/{self.post_author}/')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_ok_page_unfollow(self):
+        """Запрос пользователя отписаться от автора"""
+        response = self.authorized_client.get(
+            f'/profile/{self.follow.author}/unfollow/', follow=True
+        )
+        self.assertRedirects(response, f'/profile/{self.post_author}/')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_ok_page_comment(self):
+        """Запрос пользователя прокомментировать пост"""
+        response = self.authorized_client.get(
+            f'/posts/{self.post.id}/comment/', follow=True
+        )
+        self.assertRedirects(response, f'/posts/{self.post.id}/')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
     def test_urls_uses_correct_template_author(self):
         """URL-адрес для автора использует соответствующий шаблон."""
         for adress, template in self.templates_url_names.items():
@@ -84,6 +113,6 @@ class StaticURLTests(TestCase):
         for adress, template in self.templates_url_names.items():
             with self.subTest(template=template):
                 if adress != f'/posts/{self.post.id}/edit/' \
-                        and adress != '/create/':
+                        and adress != '/create/' and adress != '/follow/':
                     response = self.guest_client.get(adress)
                     self.assertTemplateUsed(response, template)

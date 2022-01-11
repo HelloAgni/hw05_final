@@ -14,7 +14,7 @@
       <li class="list-group-item">
         Группа: <span> {{ post.group.title }}</span>
         {% if post.group %}
-          <a href=" {% url "posts:group_list" post.group.slug %}">все записи группы</a>
+          <a href=" {% url 'posts:group_list' post.group.slug %}">все записи группы</a>
         {% endif %}
       </li>
       <li class="list-group-item">
@@ -24,7 +24,7 @@
         Всего постов автора:  <span> {{ post.author.posts.count }}</span>
       </li>
       <li class="list-group-item">
-        <a href="{% url "posts:profile" post.author.username %}">
+        <a href="{% url 'posts:profile' post.author.username %}">
           все посты пользователя
         </a>
       </li>
@@ -38,7 +38,7 @@
         {{ post.text|linebreaksbr }}
       </p>
       {% if post.author == request.user %}
-        <a class="btn btn-primary" href="{% url "posts:post_edit" post.id %}">
+        <a class="btn btn-primary" href="{% url 'posts:post_edit' post.id %}">
           редактировать пост
         </a>
       {% endif %}

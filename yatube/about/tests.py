@@ -10,13 +10,15 @@ class StaticURLTests(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.guest_client = Client()
         cls.user = User.objects.create_user(username='auth')
-        cls.authorized_client = Client()
-        cls.authorized_client.force_login(cls.user)
         cls.post_author = User.objects.create_user(username='Author')
-        cls.authorized_client_author = Client()
-        cls.authorized_client_author.force_login(cls.post_author)
+
+    def setUp(self):
+        self.guest_client = Client()
+        self.authorized_client = Client()
+        self.authorized_client.force_login(self.user)
+        self.authorized_client_author = Client()
+        self.authorized_client_author.force_login(self.post_author)
 
     def test_about(self):
         """URL-адрес about использует соответствующий шаблон."""
