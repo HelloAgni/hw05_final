@@ -40,13 +40,13 @@ class Post(models.Model):
         blank=True
     )
 
-    def __str__(self):
-        return self.text[:15]
-
     class Meta:
         ordering = ('-pub_date',)
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+
+    def __str__(self):
+        return self.text[:15]
 
 
 class Comment(models.Model):
@@ -66,6 +66,9 @@ class Comment(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'Пост: {self.post}, Автор: {self.author} - {self.text}'
+
 
 class Follow(models.Model):
     user = models.ForeignKey(
@@ -78,3 +81,6 @@ class Follow(models.Model):
         on_delete=CASCADE,
         related_name='following',
     )
+
+    def __str__(self):
+        return f'Автор: {self.author} Фоловер:{self.user}'
