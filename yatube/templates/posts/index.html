@@ -5,24 +5,31 @@
 {% endblock %}
 
 {% block content %}
-  <h1> Последние обновления на сайте </h1>
+  <h2> Последние обновления на сайте </h2>
   {% include 'posts/includes/switcher.html' %}
   {% for post in page_obj %}
     <article>
       {% include 'includes/post_info.html' %}
       {% if post.group %}
-        <a href="{% url 'posts:post_detail' post.id %}">
-         подробная информация
+        <a href="{% url 'posts:post_detail' post.id %}">          
+          Читать пост
         </a>
       {% endif %}
       <p>
         {% if post.group.slug %}
-          Группа:
-          <a href="{% url 'posts:group_list' post.group.slug %}">
-            {{ post.group.title }}
-          </a>
+          {#Группа:#}
+          {#<a href="{% url 'posts:group_list' post.group.slug %}">#}
+          {#  {{ post.group.title }}#}
+          {#</a>#}
         {% endif %}
-      </p>
+      </p>      
+      {% for com in comment %}
+        {% if post.id == com.post.id %}
+          <p align="right"> Последний комментарий к посту:
+            <b><i>{{ com.text }}</i></b>
+          </p>
+        {% endif %}    
+      {% endfor %}
     </article>
     {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}

@@ -1,3 +1,24 @@
-# hw05_final
+# yatube_project
+***Социальная сеть блогеров***
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+**Технологии**
+
+Python 3.7 Django 2.2.19
+
+**Запуск проекта в dev-режиме**
+
+- Установите и активируйте виртуальное окружение
+- Установите зависимости из файла requirements.txt
+```sh
+pip install -r requirements.txt
+```
+- В папке с файлом manage.py выполните команду:
+```sh
+python manage.py runserver
+```
+**Функционал:**
+
+- На сайте можно создать свою страницу.
+- После регистрации пользователь получает свой профайл(страницу).
+- На сайте есть форма для создания поста и вставки картинки.
+- Пользователи могут заходить на чужие страницы, подписываться на авторов и комментировать их записи.

@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 
 from .forms import CommentForm, PostForm
-from .models import Follow, Group, Post, User
+from .models import Comment, Follow, Group, Post, User
 
 
 @cache_page(20)
@@ -14,8 +14,10 @@ def index(request):
     paginator = Paginator(posts, settings.OBJECTS_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    comment = Comment.objects.all()[:1]
     context = {
         'page_obj': page_obj,
+        'comment': comment,
     }
     return render(request, 'posts/index.html', context)
 
