@@ -20,7 +20,10 @@ OBJECTS_PER_PAGE = 10
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', '[::1]']
+ALLOWED_HOSTS = [
+    '127.0.0.1', 'localhost', 'testserver', '[::1]',
+    'helloagni.pythonanywhere.com', 'www.helloagni.pythonanywhere.com',
+]
 
 INTERNAL_IPS = [
     '127.0.0.1',
