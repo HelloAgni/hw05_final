@@ -9,42 +9,38 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         Python
+        <img src="{% static "img/snake.gif" %}" width="80" height="70" alt="">
       </li>
       <li class="list-group-item">
-        SQL
-      </li>
-      <li class="list-group-item">
-        HTML/CSS
+        HTML
       </li>
     </ul>
   </aside>
   <article class="col-12 col-md-9">
     <p>
-      Все перечисленное было использованно для разработки сайта.
-      Слишком громко сказать "я умею", скорее всего изучал и применял следующие инструменты:
+      Для разработки сайта изучались и применялись следующие инструменты:
     </p>
-    <p>
+    <div class="row">
+        <div class="col">
       <ul>
         <li>
-          VScode
+          VSCode
         </li>
         <li>
-          DB Browser for SQLite
-        </li>
-        <li>
-          Git
-        </li>
-        <li>
-          Bash
+          Django
         </li>
         <li>
           Bootstrap
         </li>
       </ul>
-    </p>
+    </div>
+    <div class ="col">
+        <img src="{% static "img/vsc.png" %}" width="50" height="50" alt="">
+        <img src="{% static "img/django.png" %}" width="70" height="70" alt="">        
+        <img src="{% static "img/bootstrap.png" %}" width="70" height="70" alt="">
+    </div>
+    </div>
   </article>
 </div>
-<p align="center">
-<img src="{% static "img/Chesha.jpg" %}" width="800" height="450"  alt="">
-</p>
+
 {% endblock %}

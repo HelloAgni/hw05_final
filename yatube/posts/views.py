@@ -14,7 +14,7 @@ def index(request):
     paginator = Paginator(posts, settings.OBJECTS_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    comment = Comment.objects.all()[:1]
+    comment = Comment.objects.all().last()
     context = {
         'page_obj': page_obj,
         'comment': comment,

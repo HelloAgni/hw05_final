@@ -17,19 +17,17 @@
       {% endif %}
       <p>
         {% if post.group.slug %}
-          {#Группа:#}
-          {#<a href="{% url 'posts:group_list' post.group.slug %}">#}
-          {#  {{ post.group.title }}#}
-          {#</a>#}
+          Группа
+          <a href="{% url 'posts:group_list' post.group.slug %}">
+          {{ post.group.title }}
+          </a>
         {% endif %}
       </p>      
-      {% for com in comment %}
-        {% if post.id == com.post.id %}
+        {% if post.id == comment.post.id %}
           <p align="right"> Последний комментарий к посту:
-            <b><i>{{ com.text }}</i></b>
+            <b><i>{{ comment.text }}</i></b>
           </p>
-        {% endif %}    
-      {% endfor %}
+        {% endif %}  
     </article>
     {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
