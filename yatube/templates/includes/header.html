@@ -29,7 +29,7 @@
                 <a class="nav-link link-light" href="{% url "users:logout" %}">Выйти</a>
               </li>
               <li class="nav-item">
-                Пользователь: 
+                <img src="{% static 'img/account.png' %}" height="40px" alt=""> 
                 <b> {{ user.username }} </b>
               <li>
               {% else %}

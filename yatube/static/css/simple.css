@@ -1,0 +1,77 @@
+.button_x {
+    border-radius: 4px;
+    background-color: #3f3b39;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 8px;
+    width: 120px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button_x span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button_x span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button_x:hover span {
+    padding-right: 25px;
+  }
+  
+  .button_x:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+.button_y {
+    border-radius: 4px;
+    background-color: #75b9d4;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+    padding: 4px;
+    width: 170px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button_y span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button_y span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button_y:hover span {
+    padding-right: 25px;
+  }
+  
+  .button_y:hover span:after {
+    opacity: 1;
+    right: 0;
+  }

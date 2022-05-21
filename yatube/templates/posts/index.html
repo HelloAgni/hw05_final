@@ -1,35 +1,42 @@
 {% extends "base.html" %}
-
+{% load thumbnail %} 
 {% block title %}
   Последние обновления на сайте
 {% endblock %}
 
 {% block content %}
   <h2> Последние обновления на сайте </h2>
-  {% include 'posts/includes/switcher.html' %}
-  {% for post in page_obj %}
-    <article>
-      {% include 'includes/post_info.html' %}
-      {% if post.group %}
-        <a href="{% url 'posts:post_detail' post.id %}">          
-          Читать пост
-        </a>
-      {% endif %}
-      <p>
-        {% if post.group.slug %}
-          Группа
-          <a href="{% url 'posts:group_list' post.group.slug %}">
-          {{ post.group.title }}
-          </a>
-        {% endif %}
-      </p>      
-        {% if post.id == comment.post.id %}
-          <p align="right"> Последний комментарий к посту:
-            <b><i>{{ comment.text }}</i></b>
-          </p>
-        {% endif %}  
-    </article>
-    {% if not forloop.last %}<hr>{% endif %}
+  {% include 'posts/includes/switcher.html' %}  
+    
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for post in page_obj %}      
+    <div class="col">            
+      <div class="card mb-3 h-100">
+        {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+        <img class="card-img my-2" src="{{ im.url }}">
+        {% endthumbnail %}
+        <div class="card-body">
+          <h6 class="card-title">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Автор: {{ post.author.get_full_name }}
+              </li>
+              <li class="list-group-item">
+                Дата публикации: {{ post.pub_date|date:"d E Y" }}
+              </li>
+            </ul>
+            </h6>
+            <p class="card-text">{{ post.text|truncatewords:20 }}</p>
+            <p class="card-text" align="center">
+              <a href="{% url 'posts:post_detail' post.id %}">          
+                <button class="button_y"><span>Читать дальше                  
+                </span></button>
+              </a></p>                
+        </div>
+      </div>
+    </div>
   {% endfor %}
-  {% include 'posts/includes/paginator.html' %}
+  </div>
+{% if not forloop.last %}<hr>{% endif %}
+{% include 'posts/includes/paginator.html' %}
 {% endblock %} 
