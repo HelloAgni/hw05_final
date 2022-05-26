@@ -7,15 +7,30 @@ Python 3.7 Django 2.2.19
 
 **Запуск проекта в dev-режиме**
 
-- Установите и активируйте виртуальное окружение
-- Установите зависимости из файла requirements.txt
+- Установите и активируйте виртуальное окружение:
+```sh
+python -m venv venv
+. venv/Scripts/activate
+```
+- Установите зависимости из файла requirements.txt:
 ```sh
 pip install -r requirements.txt
 ```
-- В папке с файлом manage.py выполните команду:
+- Для запуска проекта перейдите в папку с файлом manage.py выполните команду:
 ```sh
 python manage.py runserver
+Сtrl + C   -> остановить
 ```
+- Создание таблиц в базе данных:
+```sh
+python manage.py makemigrations
+python manage.py migrate
+```
+- Наполнение базы данных:
+```sh
+python manage.py loaddata dump.json
+```
+
 **Функционал:**
 
 - На сайте можно создать свою страницу.
