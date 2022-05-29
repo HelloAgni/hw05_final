@@ -9,12 +9,15 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '(8z6i+qq)5mq(&odm$d)utp3)ml(0)b6(0n4lu)jekl=@a1^lc'
+# delete os.getenv('SECRET_KEY') and input Your SECRET_KEY = '123abc...'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 OBJECTS_PER_PAGE = 10
 

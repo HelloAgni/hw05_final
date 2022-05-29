@@ -3,7 +3,7 @@
 
 **Технологии**
 
-Python 3.7 Django 2.2.19
+Python 3.9 Django 2.2.19
 
 **Запуск проекта в dev-режиме**
 
@@ -16,7 +16,16 @@ python -m venv venv
 ```sh
 pip install -r requirements.txt
 ```
-- Для запуска проекта перейдите в папку с файлом manage.py выполните команду:
+- Для запуска проекта необходимо сгенерировать SECRET_KEY, перейдите в папку с файлом manage.py выполните:
+```sh
+python manage.py shell
+>>> from django.core.management.utils import get_random_secret_key
+>>> get_random_secret_key()
+YOUR_KEY
+>>> quit()
+скопировать полученное значение в settings.py SECRET_KEY = 'YOUR_KEY'
+```
+- После получения и вставки SECRET_KEY, запустить проект:
 ```sh
 python manage.py runserver
 Сtrl + C   -> остановить
