@@ -52,4 +52,4 @@ python manage.py loaddata dump.json
 
 ***Превью***
 
-![PyDj](/yatube/static/img/final_version.jpg =600x340)
+<img src="https://github.com/HelloAgni/hw05_final/blob/master/yatube/static/img/final_version.jpg" alt="img" width="600" height='350'>
